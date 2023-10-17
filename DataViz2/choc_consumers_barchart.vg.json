@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Top Consumers of Chocolate by Country",
+    "title": "Top Consumers of Chocolate by Country (2017)",
     "data": {
         "url": "https://raw.githubusercontent.com/christy-tsui/3179/main/DataViz2/data/per_cap_choc.csv"
     },
