@@ -1,0 +1,137 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Cocoa Bean Exports in USD (2012-2022)",
+    "width": "container",
+    "height": 400,
+    "params": [
+        {
+            "name": "Year_selection",
+            "value": 2021,
+            "bind": {
+                "input": "range",
+                "min": 2012,
+                "max": 2022,
+                "step": 1,
+                "name": "Year: "
+            }
+        }
+    ],
+    "projection": {
+        "type": "equalEarth"
+    },
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "ne_110m_admin_0_countries"
+                }
+            },
+            "transform": [
+                {
+                    "calculate": "'No export data for ' + datum.properties.NAME",
+                    "as": "note"
+                }
+            ],
+            "mark": {
+                "type": "geoshape",
+                "fill": "lightgray",
+                "stroke": "white"
+            },
+            "encoding": {
+                "tooltip": {
+                    "field": "note"
+                }
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "oceans"
+                }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "skyblue"
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "ne_110m_graticules_30"
+                }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": null,
+                "stroke": "lightgray"
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/christy-tsui/3179/main/DataViz2/data/cocoa_export_10y.csv"
+            },
+            "transform": [
+                {
+                    "lookup": "Reporter",
+                    "from": {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+                            "format": {
+                                "type": "topojson",
+                                "feature": "ne_110m_admin_0_countries"
+                            }
+                        },
+                        "key": "properties.NAME"
+                    },
+                    "as": "geo"
+                },
+                {
+                    "filter": "datum.Year == Year_selection"
+                }
+            ],
+            "mark": {
+                "type": "geoshape",
+                "stroke": "white"
+            },
+            "encoding": {
+                "shape": {
+                    "field": "geo",
+                    "type": "geojson"
+                },
+                "color": {
+                    "field": "Trade Value (USD)",
+                    "type": "quantitative",
+                    "scale": {
+                        "scheme": "lightorange",
+                        "type": "log"
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "Reporter",
+                        "type": "nominal",
+                        "title": "Country"
+                    },
+                    {
+                        "field": "Trade Value (USD)",
+                        "type": "quantitative",
+                        "title": "Trade Value (USD)",
+                        "format": ","
+                    },
+                    {
+                        "field": "Quantity",
+                        "type": "quantitative",
+                        "title": "Quantity (kg)",
+                        "format": ","
+                    }
+                ]
+            }
+        }
+    ]
+}

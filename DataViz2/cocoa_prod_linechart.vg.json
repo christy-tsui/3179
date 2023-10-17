@@ -1,0 +1,125 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Cocoa Production by Continent (1961-2021)",
+    "data": {
+        "url": "https://raw.githubusercontent.com/christy-tsui/3179/main/DataViz2/data/cocoa_beans_prod_by_region.csv"
+    },
+    "width": "container",
+    "height": 200,
+    "encoding": {
+        "x": {
+            "field": "Year",
+            "type": "temporal"
+        }
+    },
+    "layer": [
+        {
+            "encoding": {
+                "color": {
+                    "field": "Region",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Africa",
+                            "Asia",
+                            "North America",
+                            "Oceania",
+                            "South America"
+                        ],
+                        "range": [
+                            "#7fc97f",
+                            "#bdafd4",
+                            "#febf85",
+                            "#396cb0",
+                            "#f6b7d2"
+                        ]
+                    }
+                },
+                "y": {
+                    "field": "Cocoa beans (tonnes)",
+                    "type": "quantitative"
+                }
+            },
+            "layer": [
+                {
+                    "mark": "line"
+                },
+                {
+                    "transform": [
+                        {
+                            "filter": {
+                                "param": "hover",
+                                "empty": false
+                            }
+                        }
+                    ],
+                    "mark": "point"
+                }
+            ]
+        },
+        {
+            "transform": [
+                {
+                    "pivot": "Region",
+                    "value": "Cocoa beans (tonnes)",
+                    "groupby": [
+                        "Year"
+                    ]
+                }
+            ],
+            "mark": "rule",
+            "encoding": {
+                "opacity": {
+                    "condition": {
+                        "value": 0.3,
+                        "param": "hover",
+                        "empty": false
+                    },
+                    "value": 0
+                },
+                "tooltip": [
+                    {
+                        "field": "Year",
+                        "type": "temporal",
+                        "timeUnit": "year",
+                        "title": "Year"
+                    },
+                    {
+                        "field": "Africa",
+                        "type": "quantitative"
+                    },
+                    {
+                        "field": "Asia",
+                        "type": "quantitative"
+                    },
+                    {
+                        "field": "North America",
+                        "type": "quantitative"
+                    },
+                    {
+                        "field": "Oceania",
+                        "type": "quantitative"
+                    },
+                    {
+                        "field": "South America",
+                        "type": "quantitative"
+                    }
+                ]
+            },
+            "params": [
+                {
+                    "name": "hover",
+                    "select": {
+                        "type": "point",
+                        "fields": [
+                            "Year"
+                        ],
+                        "nearest": true,
+                        "on": "mouseover",
+                        "clear": "mouseout"
+                    }
+                }
+            ]
+        }
+    ]
+}

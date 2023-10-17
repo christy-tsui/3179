@@ -1,0 +1,69 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Proportion of Ratings by Company Location",
+    "data": {
+        "url": "https://raw.githubusercontent.com/christy-tsui/3179/main/DataViz2/data/choco_data_ratings.csv"
+    },
+    "width": 900,
+    "height": 400,
+    "transform": [
+        {
+            "calculate": "datum.Grade === 'Poor' ? 1 : datum.Grade === 'Below Average' ? 2 : datum.Grade === 'Satisfactory'? 3 : 4",
+            "as": "Grade Order"
+        }
+    ],
+    "mark": {
+        "type": "bar",
+        "tooltip": true
+    },
+    "encoding": {
+        "opacity": {
+            "condition": {
+                "test": "test(regexp(search_input,'i'),datum.CompanyLoc)",
+                "value": 0.8
+            },
+            "value": 0.1
+        },
+        "y": {
+            "aggregate": "count",
+            "field": "Grade",
+            "title": "Percentage",
+            "stack": "normalize"
+        },
+        "x": {
+            "field": "CompanyLoc",
+            "title": "Company Location"
+        },
+        "color": {
+            "field": "Grade",
+            "scale": {
+                "domain": [
+                    "Poor",
+                    "Below Average",
+                    "Satisfactory",
+                    "Excellent"
+                ],
+                "range": [
+                    "#ff8b60",
+                    "#ffb246",
+                    "#a9d78c",
+                    "#6bc8a3"
+                ]
+            }
+        },
+        "order": {
+            "field": "Grade Order"
+        }
+    },
+    "params": [
+        {
+            "name": "search_input",
+            "bind": {
+                "input": "search",
+                "placeholder": "Country",
+                "name": "Search:"
+            },
+            "value": ""
+        }
+    ]
+}

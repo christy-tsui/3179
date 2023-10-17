@@ -1,0 +1,100 @@
+html {
+    background-color: #5f4a49;
+}
+
+h1 {
+    text-align: center;
+    color: #310A0B;
+    font-size: 50px;
+    font-family: 'Tilt Neon', sans-serif;
+}
+
+h2 {
+    color: #491B1D;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+
+p {
+    color: black;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#text_div {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.page {
+    width: 1024px;
+    background-color: white;
+    border-radius: 15px;
+    margin: auto;
+    padding: 50px;
+    padding-top: 10px;
+}
+
+.vega-embed {
+    position: relative;
+    display: inline-box;
+    box-sizing: border-box
+}
+
+.vis-container {
+    width: 100%;
+}
+
+.poor_text {
+    color: #ff8b60;
+    font-weight: bold;
+}
+
+.belowavg_text {
+    color: #ffb246;
+    font-weight: bold;
+}
+
+.satisfact_text {
+    color: #a9d78c;
+    font-weight: bold;
+}
+
+.excellent_text {
+    color: #6bc8a3;
+    font-weight: bold;
+}
+
+.europe_text {
+    color: #f58f98;
+    font-weight: bold;
+}
+
+.africa_text {
+    color: #7fc97f;
+    font-weight: bold;
+}
+
+.asia_text {
+    color: #bdafd4;
+    font-weight: bold;
+}
+
+.southamer_text {
+    color: #f6b7d2;
+    font-weight: bold;
+}
+
+.northamer_text {
+    color: #febf85;
+    font-weight: bold;
+}
+
+.oceania_text {
+    color: #396cb0;
+    font-weight: bold;
+}
+
+.description-right {
+    padding-left: 20px;
+}

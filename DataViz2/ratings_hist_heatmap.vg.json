@@ -1,0 +1,61 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/christy-tsui/3179/main/DataViz2/data/chocolate_bars.csv"
+    },
+    "width": "container",
+    "height": 200,
+    "transform": [
+        {
+            "filter": {
+                "and": [
+                    {
+                        "field": "cocoa_percent",
+                        "valid": true
+                    },
+                    {
+                        "field": "num_ingredients",
+                        "valid": true
+                    }
+                ]
+            }
+        }
+    ],
+    "mark": {
+        "type": "rect",
+        "tooltip": {
+            "content": "encoding"
+        }
+    },
+    "encoding": {
+        "x": {
+            "title": "Cocoa Content %",
+            "bin": {
+                "maxbins": 25
+            },
+            "field": "cocoa_percent",
+            "type": "quantitative"
+        },
+        "y": {
+            "title": "Number of Ingredients",
+            "bin": {
+                "maxbins": 6
+            },
+            "field": "num_ingredients",
+            "type": "quantitative"
+        },
+        "color": {
+            "field": "rating",
+            "aggregate": "average",
+            "type": "quantitative",
+            "scale": {
+                "scheme": "redyellowgreen"
+            }
+        }
+    },
+    "config": {
+        "view": {
+            "stroke": "transparent"
+        }
+    }
+}

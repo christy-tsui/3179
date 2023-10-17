@@ -1,0 +1,95 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Top Consumers of Chocolate by Country",
+    "data": {
+        "url": "https://raw.githubusercontent.com/christy-tsui/3179/main/DataViz2/data/per_cap_choc.csv"
+    },
+    "width": "container",
+    "height": 300,
+    "encoding": {
+        "x": {
+            "field": "country",
+            "title": "Country",
+            "sort": "-y",
+            "axis": {
+                "labelAngle": 315
+            }
+        },
+        "y": {
+            "field": "per_capita_consumption",
+            "type": "quantitative",
+            "title": "Per capita consumption (kg)"
+        }
+    },
+    "layer": [
+        {
+            "mark": "bar",
+            "encoding": {
+                "color": {
+                    "field": "region",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Africa",
+                            "Asia",
+                            "Europe",
+                            "North America",
+                            "Oceania",
+                            "South America"
+                        ],
+                        "range": [
+                            "#7fc97f",
+                            "#bdafd4",
+                            "#f58f98",
+                            "#febf85",
+                            "#396cb0",
+                            "#f6b7d2"
+                        ]
+                    },
+                    "legend": {
+                        "title": "Region"
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "region",
+                        "type": "nominal",
+                        "title": "Region"
+                    },
+                    {
+                        "field": "country",
+                        "type": "nominal",
+                        "title": "Country"
+                    },
+                    {
+                        "field": "per_capita_consumption",
+                        "type": "quantitative",
+                        "title": "Per Capita Consumption (kg)"
+                    }
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "center",
+                "baseline": "alphabetic",
+                "fontSize": 10,
+                "dy": -2
+            },
+            "encoding": {
+                "text": {
+                    "field": "per_capita_consumption",
+                    "type": "quantitative"
+                },
+                "opacity": {
+                    "condition": {
+                        "test": "datum['country'] == 'Switzerland' || datum['country'] == 'China'",
+                        "value": 1
+                    },
+                    "value": 0
+                }
+            }
+        }
+    ]
+}
